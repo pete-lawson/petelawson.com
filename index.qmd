@@ -1,11 +1,32 @@
 ---
-title: "petelawson.com"
+title: "Pete Lawson"
+image: media/headshot.jpg
+toc: false
+about:
+  template: trestles
+  image-shape: round
+  image-width: 15em
+  links: 
+    - text: LinkedIn
+      icon: linkedin
+      href: https://www.linkedin.com/in/lawsonpeter
+    - text: GitHub
+      icon: github
+      href: https://github.com/pete-lawson
+      
+    - text: "{{< fa brands orcid >}} ORCiD"
+      href: https://orcid.org/0000-0001-5106-490X
+    - text: Email
+      icon: envelope
+      href: mailto:pete@petelawson.com
 ---
 
-This is a Quarto website.
+Hi, I'm Pete, Data and Visualization Librarian at Johns Hopkins University.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I love the statistical programming language R, cycling 🚲, and sprawling used bookstores with ornery owners.
 
-```{r}
-1 + 1
-```
+I studied computational topology at Tulane, exploring the importance of cancer morphology in diagnosis and prognosis, finishing my Ph.D. in 2020. During my Ph.D. I cofounded an automated digital pathology company, [Instapath](https://www.instapathbio.com/){target="_blank"}. I developed educational materials and taught workshops for the Tulane Library, as well as becoming a certified Software Carpentries instructor, before moving into libraries full time. I am open to new projects and collaborations, and you can find me on [GitHub](https://github.com/pete-lawson){target="_blank"} or [LinkedIn](https://www.linkedin.com/in/lawson){target="_blank"}.
+
+I live in DC with my wife and our dog Chewie - named for the New Orleans Mardi Gras walking parade [Chewbacchus](https://chewbacchus.org/){target="_blank"}.
+
+This site was built in R using [Quarto](quarto.org){target="_blank"}, and deployed using Netlify. My blog posts are released under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/){target="_blank"}.

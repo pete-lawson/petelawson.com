@@ -1,0 +1,32 @@
+/*-- scss:defaults --*/
+
+//Import Fonts
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+// Fonts
+
+$myserif: "Nanum Myeong", serif;
+
+// Colors
+$purple: #705dcf;
+$darkblue: #1d3461;
+// Base document colors
+
+$link-color: $darkblue; // hyperlinks 
+
+// Inline code
+$code-color: $purple; // inline code text color
+
+/*-- scss:rules --*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $myserif;
+  font-weight: 300;
+  letter-spacing: 0.010em;
+}
+/*
+.title {
+  color: $darkblue;
+}*/
