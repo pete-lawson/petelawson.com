@@ -1,9 +1,0 @@
-[
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Pete Lawson",
-    "section": "",
-    "text": "Hi, I’m Pete, Data and Visualization Librarian at Johns Hopkins University.\nI love the statistical programming language R, cycling 🚲, and sprawling used bookstores with ornery owners.\nI studied computational topology at Tulane, exploring the importance of cancer morphology in diagnosis and prognosis, finishing my Ph.D. in 2020. During my Ph.D. I cofounded an automated digital pathology company, Instapath. I developed educational materials and taught workshops for the Tulane Library, as well as becoming a certified Software Carpentries instructor, before moving into libraries full time. I am open to new projects and collaborations, and you can find me on GitHub or LinkedIn.\nI live in DC with my wife and our dog Chewie - named for the New Orleans Mardi Gras walking parade Chewbacchus.\nThis site was built in R using Quarto, and deployed using Netlify. My blog posts are released under a Creative Commons Attribution-ShareAlike 4.0 International License."
-  }
-]
