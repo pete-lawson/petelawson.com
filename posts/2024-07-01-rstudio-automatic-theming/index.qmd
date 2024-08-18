@@ -1,0 +1,115 @@
+---
+title: "Building a theme switcher for teaching with RStudio"
+description: "Switch quickly between a vanilla RStudio configuration for teaching, and a custom development configuration."
+author:
+  - name: Pete Lawson
+    url: https://petelawson.com
+    orcid: 0000-0001-5106-490X
+    affiliation: Data Services @ Johns Hopkins University
+    affiliation-url: https://dataservices.library.jhu.edu/ 
+date: 07-01-2024
+categories: [RStudio, Teaching, Alfred] # self-defined categories
+citation: 
+  url: https://petelawson.com/posts/2024-07-01-rstudio-automatic-theming/ 
+image: preview-image.png
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+Part of my day to day involves teaching workshops in R and Python. For my R workshops I teach with RStudio. I rely heavily on [participatory live coding](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090). It is important to keep your configuration as close to your learners as possible, which means sticking with the vanilla, default settings for the applications you are teaching with. 
+
+I also use RStudio for development (although that might change with the introduction of Positron), and have a bespoke configuration, with VIM bindings, custom panel layout, custom color scheme, and custom snippets.
+
+It is a pain to reset my configuration to default, and I can never remember what the default pane layout is, and lastly I don't want to lose all of my custom configuration.
+
+A teaching mode is an open RStudio issue (since 2019): see [[Feature request] Teaching/presentation mode #4276](https://github.com/rstudio/rstudio/issues/4276) and the related issue [Feature Request: Provide Session-level control over Themes or Background Colors #2350](https://github.com/rstudio/rstudio/issues/2350). 
+
+In fact, my comment on [#2350](https://github.com/rstudio/rstudio/issues/2350) seemd to push the issue up from backlog3 to [backlog2](https://github.com/rstudio/rstudio/milestone/23), but it doesn't seem like any work was done on it since then.
+
+![](images/issue.png){width=50%}
+
+## RStudio 1.3 - A New Hope
+
+With the introduction of RStudio 1.3, your configuration is stored as a json (`rstudio-prefs.json`) in the `rstudio` folder within `.config` in your home directory. 
+
+This gave me an idea - what if I could keep two copies of my configuration; one for teaching and one for development, and write a bash script to swap between them?
+
+## Building a Theme Switcher
+
+### Step 1: Creating Distinct Configurations
+
+1. Close RStudio
+
+2. Rename the existing configuration folder to preserve your development configuration:
+
+   ```r
+   mv ~/.config/rstudio ~/.config/rstudiodev
+   ```
+
+3. Launch RStudio. It will generate a new `.config/rstudio` folder with default, vanilla settings.
+
+Now, `~/.config/rstudiodev` contains the development configuration, and `~/.config/rstudio` contains the teaching configuration. RStudio uses whichever folder is named `rstudio` as the active configuration.
+
+### Step 2: Create a bash script for swapping between active configurations
+
+I wrote a simple script to check which directory is present, either `rstudiodev` or `rstudioteach`. If `rstudioteach` is present, then that means that `rstudio` is the development config. The script will rename `rstudio` to `rstudiodev`, and rename `rstudioteach` to `rstudio`, thus swapping the development and teaching configurations. If I call the script again, the reverse will occur:
+
+```bash
+dev_config="$HOME/.config/rstudiodev"
+teach_config="$HOME/.config/rstudioteach"
+active_config="$HOME/.config/rstudio"
+
+if [ -d "$teach_config" ]; then
+  mv "$active_config" "$dev_config"
+  mv "$teach_config" "$active_config"
+  echo "Teaching mode active!"
+elif [ -d "$dev_config" ]; then
+  mv "$active_config" "$teach_config"
+  mv "$dev_config" "$active_config"
+  echo "Development mode active!"
+fi
+```
+
+### Step 3: Integrate the bash script with Alfred
+
+To streamline the process further, I integrated this script with Alfred, a powerful application launcher for macOS. 
+
+By setting up a custom Alfred workflow, I can now switch between teaching and development configurations with a simple keyboard shortcut or voice command.
+
+1. Create a new workflow from template:
+   
+   ![](images/workflow.png)
+
+   Select Templates > Essentials > Keyword to Script Notification 
+
+   `Keyword to Script Notification` allows us to activate the script with a keyword, and generate a notification with the active configuration.
+
+2. Configure the workflow:
+
+   ![](images/configure-workflow.png){width=75%}
+  
+   1. Set Keyword:
+
+     ![](images/keyword.png){width=75%}
+
+   2. Configure Script:
+
+     ![](images/run-script.png){width=75%}
+
+   3. Set Notification:
+
+     ![](images/post-notification.png){width=75%}
+
+
+Now when you activate `teach` in Alfred:
+
+
+ ![](images/toggle.png){width=75%}
+
+Now you can toggle between teaching and development mode!
+
+ ![](images/teaching-mode.png){width=75%}
+
+## Conclusion
+
+This solution offers a quick and efficient way to toggle between teaching and development environments in RStudio. While it's not as seamless as a built-in teaching mode, it significantly reduces the friction of switching between configurations, allowing me to maintain my preferred setup for development while easily adapting to a learner-friendly environment for workshops.
+
