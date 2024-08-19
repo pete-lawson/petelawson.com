@@ -3,6 +3,7 @@
 .Rhistory
 .RData
 .Ruserdata
+package-lock.json
 /.quarto/
 .Rproj.user
 /_*.local
