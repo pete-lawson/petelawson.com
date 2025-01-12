@@ -1,6 +1,6 @@
 ---
 title: "Pete Lawson"
-image: media/headshot.jpg
+image: media/headshot.png
 toc: false
 about:
   template: trestles
